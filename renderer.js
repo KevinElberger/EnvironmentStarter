@@ -1,14 +1,18 @@
 const ipc = require('electron').ipcRenderer
-let trayOn = false
+const remote = require('electron').remote;
+const shell = require('electron').shell
+const os = require('os')
 
-ipc.send('put-in-tray')
+let window = remote.getCurrentWindow()
 
-// Tray removed from context menu on icon
-ipc.on('tray-removed', function () {
-  ipc.send('remove-tray')
-  trayOn = false
-})
+(function () {
+  document.getElementById('headline').innerHTML = "Starting Environment...";
 
-ipc.on('start', function() {
-  ipc.send('start')
-})
+  shell.openItem('C:\\Users\\Kevin\\AppData\\Roaming\\Spotify\\Spotify.exe')
+  shell.openItem('C:\\Users\\Kevin\\AppData\\Local\\slack\\slack.exe')
+  shell.openItem('C:\\Program Files (x86)\\JetBrains\\IntelliJ IDEA 2017.1\\bin\\idea64.exe')
+  shell.openItem('C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe')
+  shell.openItem('C:\\Program Files\\ShrewSoft\\VPN Client\\ipseca.exe')
+
+  window.close()
+}())
